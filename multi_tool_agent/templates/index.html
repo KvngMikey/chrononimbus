@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ChronoNimbus Agent</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 50px auto;
+      }
+      #chat {
+        border: 1px solid #ccc;
+        padding: 10px;
+        height: 400px;
+        overflow-y: scroll;
+      }
+      .user {
+        color: blue;
+        margin: 5px 0;
+      }
+      .agent {
+        color: green;
+        margin: 5px 0;
+      }
+      input[type="text"] {
+        width: 80%;
+        padding: 8px;
+      }
+      button {
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ChronoNimbus Agent</h1>
+    <div id="chat">
+      <div class="agent">
+        Hello! I can provide the current time and live weather for any city. Name any City.
+      </div>
+    </div>
+    <input
+      type="text"
+      id="message"
+      placeholder="Type a city name..."
+    />
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+      const chat = document.getElementById("chat");
+
+      function addMessage(sender, text) {
+        const div = document.createElement("div");
+        div.className = sender;
+        div.textContent = text;
+        chat.appendChild(div);
+        chat.scrollTop = chat.scrollHeight;
+      }
+
+      async function sendMessage() {
+        const msgInput = document.getElementById("message");
+        const msg = msgInput.value.trim();
+        if (!msg) return;
+        addMessage("user", msg);
+        msgInput.value = "";
+
+        try {
+          const response = await fetch(
+            `/query?city=${encodeURIComponent(msg)}`
+          );
+          const data = await response.json();
+          addMessage("agent", data.response);
+        } catch (err) {
+          addMessage("agent", "Error: Could not reach the agent.");
+        }
+      }
+    </script>
+  </body>
+</html>
