@@ -5,9 +5,4 @@
 - ⏰ Local time reporting: Returns the current time for all supported cities
 - 🛠️ Agentic multi-tool integration: Combines multiple “tools” in a single intelligent agent for smarter, context-aware responses
 - 💻 Python-based: Lightweight, modular, and easy to extend for custom use cases
-- 🌍 Global coverage: Works with cities worldwide, providing accurate, up-to-date data
-
-`Example queries:`
-- “What’s the weather in Tokyo right now?”
-- “What time is it in Paris?”
-- “Will it rain in New York tomorrow?”
+- 🌍 Global coverage: Work
