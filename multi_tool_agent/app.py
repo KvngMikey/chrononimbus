@@ -18,6 +18,14 @@ def run_agent(city: str) -> dict:
 
     return combined
 
+@app.route("/")
+def home():
+    return """
+    <h1>ChronoNimbus Agent</h1>
+    <p>Use the <code>/query?city=CityName</code> endpoint to get weather and time.</p>
+    <p>Example: <a href="/query?city=Tokyo">/query?city=Tokyo</a></p>
+    """
+
 @app.route("/query", methods=["GET"])
 def query():
     city = request.args.get("city")
